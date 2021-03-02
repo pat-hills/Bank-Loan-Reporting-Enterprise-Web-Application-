@@ -1,0 +1,18 @@
+ <meta http-equiv="Content-Security-Policy" content="default-src https: 'self' 'unsafe-inline'; style-src-attr https: 'self' 'unsafe-inline';style-src-elem https: 'self' 'unsafe-inline' https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700; style-src: 'self' 'unsafe-inline';
+          script-src-elem https: 'self' 'unsafe-inline' https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js;">
+		  
+		  
+		  
+		  
+
+
+
+ <add name="Content-Security-Policy" value="script-src-elem https 'self' 'unsafe-inline'; style-src-elem https 'self' 'unsafe-inline' " />
+		    
+ <add name="Access-Control-Allow-Origin" value="*" />   
+ 
+<add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains" />
+			  <add name="X-Permitted-Cross-Domain-Policies" value="master-only" />
+			  <add name="Referrer-Policy" value="origin" />
+			  <add name="X-Content-Type-Options" value="NOSNIFF" />
+			  <add name="X-XSS-Protection" value="1; mode=block" />

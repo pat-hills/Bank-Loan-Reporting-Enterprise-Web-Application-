@@ -1,0 +1,38 @@
+  
+
+                        //Should be done here
+
+                        //CHECKING IF USER EXIST
+                        int UserLoginSessionExist = LoginSession.CountCurrentLogin(SecurityUser.Name.ToString().ToLower());
+                        //GETTING MAXIMUM TIMEOUT SESSION// 30 MINUTES
+                        int getTimeSession = Constants.Timeout;
+                        //GETTING USER LAST LOGIN SESSION
+                        DateTime UserLastActivity = LoginSession.getUserLastActivity(SecurityUser.Name.ToString().ToLower());
+                        //GETTING AND CHECKING THE DIFFERENCE
+
+                        TimeSpan interval = DateTime.Now - UserLastActivity;
+
+                        if (UserLoginSessionExist > 0)
+                        {
+                            if (interval.TotalMinutes > getTimeSession)
+                            {
+                                LoginSession.UpdateUserTimeActivitySession(SecurityUser.Name.ToString().ToLower());
+
+                                return RedirectToAction("LogOff", "Account");
+
+                            }
+                            else
+                            {
+
+                                TempData["AlreadyLogInn"] = "You have already login as a user";
+                                return RedirectToAction("Index", "Home");
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            LoginSession.RegisterLoginSession(SecurityUser.Name.ToString().ToLower(), newSessionId);
+
+                        }

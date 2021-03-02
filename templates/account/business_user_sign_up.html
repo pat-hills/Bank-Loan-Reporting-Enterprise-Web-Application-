@@ -1,0 +1,75 @@
+{% extends "account/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+     
+<div class="main">
+
+    <section class="signup">
+       
+        <div class="container">
+          
+            <div class="signup-content">
+                <div class="logo"> 
+                <!-- <img class="imgLogo" width="200" height="auto" src="static/img/StepL_Logo.png" alt=""> -->
+                <img class="imgLogo" width="125" height="auto" src="{% static 'img/repurta_transparent_logo.png' %}" alt="">
+
+                <hr style="height:1.5px;border-width:0;color:whitesmoke;background-color:whitesmoke; margin-top: -75px;">
+              </div>
+                <form method="POST"  action="{% url 'appusers:business_app_user_sign_up' %}"    class="signup-form">
+
+                    {% if message %}
+                  <div>
+                    <label id="error2" style="color:red;display: inline-block; position: static; text-align: center;">
+                        <li>{{ message }}</li>
+                    </label>   
+                   
+                
+                </div>
+                   {% endif %}
+
+                    {% csrf_token %}
+                    <h3 style="text-align: center; margin-top: 10px;font-size: 14px;line-height: 1.8;color: #222;font-weight: 800;font-family: 'Montserrat';" class="form-title">Sign Up</h3>
+                    <h4 style="text-align: center; margin-top: 10px;" class="form-title">Let's start with the following details</h4>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-input" required autocomplete="off" name="email" id="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-input" required autocomplete="off" name="firstname" id="firstname" />
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-input" required autocomplete="off" name="lastname" id="lastname" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" class="form-input" required autocomplete="off" name="password" id="Password" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password (again)</label>
+                        <input type="text" class="form-input" required autocomplete="off" name="confirmpassword" id="confirmpassword" />
+                    </div>
+
+                  
+                    
+  
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit"  class="form-submitFistnameLastname" value="CREATE ACCOUNT"/>
+                    </div>
+
+                    <h4 style="text-align: center; margin-top: 10px;" class="form-title">Already have an account? <a style="text-decoration: none; text-decoration: none; color: linear-gradient(45deg, #5846f9 0%, #7b27d8 100%);" href="{% url 'appusers:login_business'  %}">Login</a></h4> 
+                </form>
+                
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+{% endblock %}

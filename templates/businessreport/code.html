@@ -1,0 +1,245 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+
+ 
+
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Business Report Details </h2>
+                    <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'business:business_complete'  %}" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Report Details</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+       
+        <div class="navbar bg-white breadcrumb-bar border-bottom">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">
+
+                        {% if month_summary.report_category == "Published"   %}
+
+                                                   
+                        <span class="badge-dot badge-success mr-1"></span>Published
+                        {% else %}
+                        <span class="badge-dot badge-brand mr-1"></span>Draft
+                         
+                        {% endif %}
+                        
+                       
+
+
+                    </a>
+
+
+                    </li>
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-calendar-alt"></i>
+                        {{month_summary.reporting_date}}
+
+
+
+                    </a>
+                    </li>
+                    
+                </ol>
+            </nav>
+            <div class="dropdown">
+                <button class="btn btn-outline-light btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Share</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-primary" href="#">Export To PDF</a>
+                </div>
+            </div>
+        </div> </br>
+       
+        <div class="ecommerce-widget">
+
+            
+
+           
+            
+            {% if break_down_report %}
+          
+            {% for breakdown in break_down_report %}
+           
+          
+
+            {% if breakdown.report_metric.institution_custom_metric.unit_measurement == "Text" %}
+
+            <div class="row">
+
+         
+                
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-header pills-regular">
+                            <h3>{{breakdown.report_metric.institution_custom_metric.metric_name}}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                
+                                 
+                                <div >
+                                    
+                                    <p>{{breakdown.report_value_non_numeric}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                
+                
+              
+               
+            
+
+            {% else %}
+
+
+            <div class="row">
+
+           
+                
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                        <div class="card-body">
+                            <h5 class="text-muted">{{breakdown.report_metric.institution_custom_metric.metric_name}}</h5>
+                            <div class="metric-value d-inline-block">
+                                <h1 style="color: #0357A7;" class="mb-1">{{breakdown.report_value_numeric}}</h1>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+              
+                <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                        <div class="card-body">
+                            <h5 class="text-muted">New Customer</h5>
+                            <div class="metric-value d-inline-block">
+                                <h1 style="color: #0357A7;" class="mb-1">1245</h1>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div  style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                        <div class="card-body">
+                            <h5 class="text-muted">Visitor</h5>
+                            <div class="metric-value d-inline-block">
+                                <h1 style="color: #0357A7;" class="mb-1">13000</h1>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             -->
+            </div>
+            {% endif %}
+
+            {% empty %}
+            <li>No Records!!!!.</li>
+            {% endfor %}
+
+            {% endif %}
+
+
+
+            <!-- 
+   
+           <div class="row">
+
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <a href="">
+                  
+                        <div style="border-radius:10px; height:230px;" class="card">
+                     
+                            <div style="text-align: center;" class="card-body">
+                        <img style="width:60px; height:auto;display: block; margin-left: auto; margin-right: auto;" alt="Total-farmers" src="{% static 'img/group_users.png' %}" />
+                            </br>
+                            <h3 style="color: #0357A7;" class="mb-1">Users</h3>
+                            <div class="metric-value d-inline-block">
+                                <h4 class="text-muted">Manage users in institution</h4>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                              
+                            </div>
+                        </div>
+                        <div id="sparkline-revenue"></div>
+
+                 
+                      </div>
+
+                    </a>
+
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <a href="">
+                        <div style="border-radius:10px; height:230px;" class="card">
+                            <div style="text-align: center;" class="card-body">
+                            <img style="width:60px; height:auto;display: block; margin-left: auto; margin-right: auto;" alt="Total-farmers" src="{% static 'img/settings_institution.png' %}" />
+                        </br>   
+                            <h3 style="color: #0357A7;" class="mb-1">Institution settings</h3>
+                            <div class="metric-value d-inline-block">
+                                <h4 class="text-muted">Set up all custom settings for institution</h4>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                              
+                            </div>
+                        </div>
+                        <div id="sparkline-revenue"></div>
+                    </div>
+                    </a>
+                </div>
+                
+            </div>   
+            
+            
+             -->
+
+ 
+        </div>
+    </div>
+</div>
+ 
+
+{% endblock %}

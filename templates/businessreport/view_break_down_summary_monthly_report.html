@@ -1,0 +1,245 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+
+{% load humanize %}
+
+ 
+
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Business Report Details </h2>
+                    <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'business:business_complete'  %}" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Report Details</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+       
+        <div class="navbar bg-white breadcrumb-bar border-bottom">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">
+
+                        {% if month_summary.report_category == "Published"   %}
+
+                                                   
+                        <span class="badge-dot badge-success mr-1"></span>Published
+                        {% else %}
+                        <span class="badge-dot badge-brand mr-1"></span>Draft
+                         
+                        {% endif %}
+                        
+                       
+
+
+                    </a>
+
+
+                    </li>
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-calendar-alt"></i>
+                        {{month_summary.reporting_date}}
+
+
+
+                    </a>
+                    </li>
+                    
+                </ol>
+            </nav>
+            <div class="dropdown">
+                <button class="btn btn-outline-light btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {% if month_summary.report_category == "Published"   %}
+                    <a class="dropdown-item" href="{% url 'businessreport:edit_break_down_summary_monthly_report' month_summary.id %}"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="dropdown-divider"></div>
+                    <a  class="dropdown-item" href="{% url 'businessreport:delete_monthly_report' month_summary.id %}" data-toggle="modal" data-target="#{{month_summary.id}}"><i class="fas fa-trash"></i> Delete</a>
+              
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"   href="#"> <i class="fas fa-share-alt"></i> Share</a>
+                    <div class="dropdown-divider"></div>
+                    <!-- <a class="dropdown-item text-primary" href="#"> <i class="far fa-file-pdf"></i> Export To PDF</a> -->
+                    <a class="dropdown-item" href="#"> <i class="far fa-file-pdf"></i> Export To PDF</a>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'businessreport:edit_break_down_summary_monthly_report' month_summary.id %}"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="dropdown-divider"></div>
+                    <a data-toggle="modal" data-target="#{{month_summary.id}}" class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div> </br>
+
+
+
+        <div class="modal fade" id="{{month_summary.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure, you want to delete monthly report?</h5>
+                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </a>
+                    </div>
+
+                    <div class="modal-body">
+                     
+                        <form  method="POST" action="{% url 'businessreport:delete_monthly_report' month_summary.id %}" id="basicform" data-parsley-validate="">
+                            {% csrf_token %}
+                            
+                            
+                                 
+                                <input id="inputEmail" type="hidden" value="{{month_summary.id}}"   name="id"  required   autocomplete="off" class="form-control">
+                                 
+                           
+
+                          
+                            
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                <button type="submit" class="btn btn-space btn-danger">Delete Report</button>
+                            </div>
+
+                            
+                        </form>
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+       
+        <div class="ecommerce-widget">
+
+            
+
+           
+            
+            {% if break_down_report %}
+          
+            {% for breakdown in break_down_report %}
+           
+          
+
+            {% if breakdown.report_metric.institution_custom_metric.unit_measurement == "Text" %}
+
+            <div class="row">
+
+         
+                
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-header pills-regular">
+                            <h3>{{breakdown.report_metric.institution_custom_metric.metric_name}}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                
+                                 
+                                <div >
+                                    
+                                    <p>{{breakdown.report_value_non_numeric|safe}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                
+                
+              
+               
+            
+
+            {% else %}
+
+
+            {% if breakdown.report_metric.institution_custom_metric.unit_measurement == "Monetary" %}
+
+            <div class="row">
+
+           
+                
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                        <div class="card-body">
+
+
+                            <h5 class="text-muted">{{breakdown.report_metric.institution_custom_metric.metric_name}}</h5>
+                            <div class="metric-value d-inline-block">
+                                <h1 style="color: #0357A7;" class="mb-1">{{breakdown.report_value_numeric|floatformat:2|intcomma}}</h1>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                              
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
+
+            <div class="row">
+
+           
+                
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                        <div class="card-body">
+
+
+                            <h5 class="text-muted">{{breakdown.report_metric.institution_custom_metric.metric_name}}</h5>
+                            <div class="metric-value d-inline-block">
+                                <h1 style="color: #0357A7;" class="mb-1">{{breakdown.report_value_numeric|intcomma}}</h1>
+                            </div>
+                            <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                              
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+            {% endif %}
+
+            {% empty %}
+            <li>No Records!!!!.</li>
+            {% endfor %}
+
+            {% endif %}
+
+ 
+
+ 
+        </div>
+    </div>
+</div>
+ 
+
+{% endblock %}

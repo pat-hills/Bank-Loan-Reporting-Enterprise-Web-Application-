@@ -1,0 +1,28 @@
+
+Content management for Repurta
+
+What Repurta Is? or Welcome To Repurta
+
+Repurta is a platform that facilitates/fastrack the process of which
+business acquires loans facility and reports the progress of their business or projects
+to financial institutions in sim
+
+
+<div class="container-fluid" data-aos="fade-up">
+      <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1>Smarter Insightful Progress Report Experience With Repurta</h1>
+          <h2>your business loan applications and reporting progress reports to <i> financial institutions</i> the easy seamless way</h2>
+          <div> <a target="_blank" href="{% url 'appusers:business_app_user_sign_up' %}" class="btn-get-started scrollto">Get Started Now</a></div>
+        </div>
+        <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
+          <img src="{% static 'website/assets/img/hero-img.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+	
+	Easy to apply for business loans to financial institutions with faster approval process
+	
+	          Repurta as a data report and evaluation tool can be used to assess past, present,
+             and future business information while keeping track of the overall performance of a business and its creditworthiness 
+            to help financial institutions in decision making before and after giving out loans

@@ -1,0 +1,1 @@
+web: gunicorn repurta.wsgi --log-file -

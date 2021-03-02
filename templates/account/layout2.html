@@ -1,0 +1,283 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}  {% endblock %}</title>
+
+         <link href="{% static 'onboarding/css/style.css' %}" rel="stylesheet">
+
+         <style>
+.form-submitEmail{
+
+  width: 100%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-image: -moz-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -ms-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -o-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -webkit-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: linear-gradient(to left, #74ebd5, #74ebd5);
+  margin-top: 245px; 
+  height: 60px; overflow: visible; margin-bottom: 1.0em;   
+}
+
+
+  .form-submitPassword{
+
+    width: 100%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-image: -moz-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -ms-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -o-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -webkit-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: linear-gradient(to left, #74ebd5, #74ebd5);
+  margin-top: 245px; 
+  height: 60px; overflow: visible; margin-bottom: 1.0em;  
+}
+  
+ .form-submitEmployment{
+
+
+ width: 100%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-image: -moz-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -ms-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -o-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -webkit-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: linear-gradient(to left, #74ebd5, #74ebd5);
+  
+  margin-top: 245px; 
+  height: 60px; overflow: visible; margin-bottom: 1.0em;  
+
+ }
+ 
+ .form-submitFinancialSituation{
+   width: 100%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-image: -moz-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -ms-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -o-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: -webkit-linear-gradient(to left, #74ebd5, #74ebd5);
+  background-image: linear-gradient(to left, #74ebd5, #74ebd5);
+  margin-top: 70px;
+  height: 60px; overflow: visible; margin-bottom: 1.0em; 
+
+
+ }
+ 
+ .form-submitFistnameLastname{
+
+  width: 100%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-image: -moz-linear-gradient(to left, #0357A7, #0357A7);
+  background-image: -ms-linear-gradient(to left, #0357A7, #0357A7);
+  background-image: -o-linear-gradient(to left, #0357A7, #0357A7);
+  background-image: -webkit-linear-gradient(to left, #0357A7, #0357A7);
+  background-image: linear-gradient(to left, #0357A7, #0357A7);
+  margin-top: 1px;
+  height: 60px; 
+ }
+
+
+ body {
+        
+
+        background: url( "{% static 'img/login_back_blurry_2.png' %}") no-repeat center center fixed !important;
+        background-size: cover !important;
+
+    }
+
+         </style>
+         
+         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+         <script>
+         $(document).ready(function(){
+             $("input[name$='financialSituation']").click(function(){
+          var financialValue = $(this).val();
+        if(financialValue=='Yes') {
+            
+          $("#customerDebtAmountDiv").show();           
+         }else if(financialValue=='No') {
+          
+         $("#customerDebtAmountDiv").hide();   
+         }else{
+            $("#customerDebtAmountDiv").hide();  
+         } });      
+         });
+
+
+    function validate() {
+      
+      if(document.myForm.firstname.value == "" ) {
+          //alert("enter name");
+         document.getElementById("error2").innerHTML = "All fields are required";
+        document.myForm.firstname.focus() ;
+         return false;
+      }
+
+      if( document.myForm.lastname.value == "" ) {
+        document.getElementById("error2").innerHTML="All fields are required";
+         document.myForm.lastname.focus() ;
+         return false;
+      }
+      return( true );
+   }
+
+
+
+   function validatePassword() {
+       
+    var reg = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$/;
+
+    if (reg.test(document.myForm.password.value) == false) 
+        {
+            document.getElementById("error5").innerHTML = "Must be numbers, letters and at least 7 characters!";
+            document.myForm.password.focus() ;
+            return false;
+        }
+      
+      return( true );
+   }
+
+
+   
+   function validateEmail() {
+       
+       var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+   
+       if (reg.test(document.myForm.emailAddress.value) == false) 
+           {
+               document.getElementById("error4").innerHTML = "The Email Address Is Not Valid!";
+               document.myForm.emailAddress.focus() ;
+               return false;
+           }
+         
+         return( true );
+      }
+
+
+
+
+
+
+// function CheckValidationPassword(password){
+//         var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/;
+//        var reg2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/;
+
+//         if (reg2.test(password.value) == false) 
+//         {
+//             document.getElementById("error5").innerHTML = "Please enter password that has numbers, letters and at least 7 characters in length!";
+//             document.getElementById("submit").disabled = true;
+//             return false;
+//         }
+        
+//         else{
+//             document.getElementById("submit").disabled = false;
+//         }
+
+//         return true;
+
+// }
+
+
+function validateFinancialStatus() {
+      
+      if(document.myForm.annualIncome.value == "" || document.myForm.financialSituation.value == "" ) {
+          //alert("enter name");
+         document.getElementById("error6").innerHTML = "All fields are required";
+        document.myForm.annualIncome.focus() ;
+         return false;
+      } 
+      return( true );
+   }
+
+
+   function validateEmploymentStatus() {
+      
+     
+
+      if( document.myForm.employmentStatus.value == "" ) {
+        document.getElementById("error7").innerHTML="All fields are required";
+         document.myForm.employmentStatus.focus() ;
+         return false;
+      }
+      return( true );
+   }
+
+
+         </script>
+
+    </head>
+    <body>
+        {% block body %}
+
+
+        
+        {% endblock %}
+
+
+             <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>   -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script> -->
+       
+
+
+                <!-- <script src="{% static 'onboarding/js/main.js' %}"></script>
+                <script src="{% static 'onboarding/vendor/jquery/jquery-ui.min.js' %}"></script>
+                <script src="{% static 'onboarding/vendor/jquery/jquery.min.js' %}"></script> --> 
+
+    </body>
+
+
+
+
+</html>

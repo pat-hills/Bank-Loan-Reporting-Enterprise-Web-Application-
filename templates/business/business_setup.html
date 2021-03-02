@@ -1,0 +1,240 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Hello, {{request.user.first_name}}, Let's setup your business details! </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Business setup</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- validation form -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                <div class="card">
+                                    <h5 class="card-header">Business Setup Form</h5>
+
+                                    {% if message %}
+                                    <div>
+                                      <label id="error2" style="color:red;display: inline-block; position: static; text-align: center;">
+                                          <li>{{ message }}</li>
+                                      </label>   
+                                     
+                                  
+                                  </div>
+                                     {% endif %}
+
+                                    <div class="card-body">
+                                        
+                                        <form  method="POST" enctype="multipart/form-data" action="{% url 'business:business_setup_register' %}" id="basicform" data-parsley-validate="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="inputUserName">Name</label>
+                                                <input id="inputUserName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter name of business" autocomplete="off" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Location</label>
+                                                <input id="inputEmail" type="text" name="location" data-parsley-trigger="change" required="" placeholder="Enter location" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Contact</label>
+                                                <input id="inputEmail" type="text" name="contact" data-parsley-trigger="change" required="" placeholder="Enter contact" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Tagline</label>
+                                                <textarea id="inputEmail" type="tel" name="tagline" data-parsley-trigger="change" required="" placeholder="Enter business tagline" autocomplete="off" class="form-control"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Country</label>
+                                                <select name="country" class="form-control">
+                                                    <option selected>Ghana</option>
+                                                    <option>Nigeria</option>
+                                                    <option>Zambia</option>
+                                                    <option>Zimbabwe</option>
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Region</label>
+                                                <select  name="region" class="form-control">
+                                                    <option selected>Ashanti</option>
+                                                    <option>Greater Accra</option>
+                                                    <option>Eastern</option>
+                                                    <option>Western</option>
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                             <label for="inputEmail">Industry</label>
+                                             <select name="industry" class="form-control">
+                                            <option selected>----------</option>
+                                             <option value="accounting">Accounting</option>
+                                             <option value="advertising">Advertising</option>
+                                             <option value="agriculture_food_supply">Agriculture &amp; Food Supply</option> 
+                                              <option value="agritech">Agritech</option>
+                                              <option value="architecture_planning">Architecture &amp; Planning</option>
+                                             <option value="arts_crafts">Arts &amp; Crafts</option>
+                                              <option value="automotive">Automotive</option> 
+                                              <option value="aviation_aerospace">Aviation &amp; Aerospace</option> 
+                                              <option value="banking">Banking</option>
+                                            <option value="biotechnology">Biotechnology</option>
+                                             <option value="broadcast_media">Broadcast Media</option> 
+                                             <option value="business_services">Business Services</option>
+                                              <option value="capital_markets">Business Services</option>
+                                            <option value="civic_social">Civic &amp; Social Organisation</option> 
+                                            <option value="civil_engineering">Civil Engineering</option>
+                                          <option value="computer_games">Computer Games</option> 
+                                          <option value="computer_hardware">Computer Hardware</option>
+                                          <option value="computer_networking">Computer Networking</option>
+                                          <option value="computer_software">Computer Software</option>
+                                         <option value="communications_public_relations">Communications &amp; Public Relations</option>
+                                         <option value="consumer_electronics">Consumer Electronics</option>
+                                         <option value="consumer_goods">Consumer Goods</option> 
+                                         <option value="data_information">Data &amp; Information Services</option> 
+                                         <option value="defence_space">Defence &amp; Space</option>
+                                          <option value="developer_tools">Developer Tools</option> 
+                                          <option value="e_commerce">E-Commerce</option> 
+                                          <option value="education">Education</option> 
+                                          <option value="fashion_beauty">Fashion, Apparel &amp; Beauty</option> 
+                                          <option value="fintech">Fintech</option> <option value="fitness">Fitness</option>
+                                           <option value="food">Food</option> <option value="gaming">Gaming</option> 
+                                           <option value="government">Government</option> <option value="health">Health</option> 
+                                           <option value="home_family_lifestyle">Home, Family &amp; Lifestyle</option>
+                                            <option value="hospitality">Hospitality</option> <option value="import_export">Import &amp; Export</option>
+                                             <option value="industrial_energy_environment">Industrial, Energy &amp; Environment</option> 
+                                             <option value="international_affairs_trade_development">International Affairs, Trade &amp; Development</option> 
+                                             <option value="internet">Internet</option>
+                                              <option value="investment_banking_managemenent">Investment Banking &amp; Managemenent</option>
+                                            <option value="legal_services">Legal Services</option> 
+                                             <option value="leisure_travel_tourism">Leisure, Travel &amp; Tourism</option> 
+                                             <option value="logistics_supply_chain">Logistics &amp; Supply Chain</option>
+                                             <option value="media_entertainment">Media &amp; Entertainment</option>
+                                              <option value="medicine">Medicine</option> <option value="nanotechnology">Nanotechnology</option> 
+                                               <option value="publishing_writing_editing">Publishing, Writing &amp; Editing</option>
+                                          <option value="construction_and_property_management">Real Estate, Property Management &amp; Construction</option>
+                                           <option value="retail_commerce_shopping">Retail, Commerce &amp; Shopping</option>
+                                     <option value="security">Security</option> <option value="sports">Sports</option> 
+                                     <option value="non_profilt">Non-Profit</option>
+                                      <option value="telecommunications">Telecommunications</option>
+                                       <option value="transportation">Transportation</option> 
+                                       <option value="travel_tourism">Travel &amp; Tourism</option>
+                                        <option value="venture_capital_private_equity">Venture Capital &amp; Private Equity</option>
+                                         <option value="other">Other</option>
+
+
+                                             </select>
+                                            </div>
+
+                                            <!-- <div class="form-group">
+                                                <label for="inputEmail">District</label>
+                                                <select name="district" class="form-control">
+                                                    <option selected>Aywaso</option>
+                                                    <option>Kwadaso</option>
+                                                    <option>Bonso</option>
+                                                    <option>Otuaso</option>
+                                                </select>
+                                                
+                                            </div> -->
+
+                                           
+                                            <!-- <div class="form-group">
+                                                <label for="inputEmail">Date business was founded</label>
+                                              
+                                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                    <input type="text" name="date_of_founding" class="form-control datetimepicker-input" data-date-format="yyyy-mm-dd" data-target="#datetimepicker4" />
+                                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Date business was founded</label>
+                                              
+                                                <div class="input-group date"  data-target-input="nearest">
+                                                    <input required autocomplete="off"  class="datepicker" name="date_of_founding" data-date-end-date="0d"  />
+                                                   
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Upload business logo</label>
+                                                <input id="inputEmail" type="file" name="businessLogo" data-parsley-trigger="change" required="" placeholder="Enter contact" autocomplete="off" class="form-control">
+                                            </div>
+                                             
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                                                    <label class="be-checkbox custom-control custom-checkbox">
+                                                         
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <p class="text-left">
+                                                        <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                                        <!-- <button class="btn btn-space btn-secondary">Cancel</button> -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                
+
+
+ 
+                     
+                </div>
+            </div>
+
+{% endblock %}

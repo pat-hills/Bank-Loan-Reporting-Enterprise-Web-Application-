@@ -1,0 +1,589 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Loan application </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Loan application</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                   <b>Loan application to :</b>
+                                </div>
+                                <div class="card-body">
+                                    
+                                        <h1>{{bank_name}}</h1>
+                                   
+                                   
+                                </div>
+                                <div class="card-footer">
+              
+                            </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- validation form -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                <div class="card">
+                                    <h5 class="card-header">Loan application form</h5>
+
+                                    {% if message %}
+                                    <div>
+                                      <label id="error2" style="color:red;display: inline-block; position: static; text-align: center;">
+                                          <li>{{ message }}</li>
+                                      </label>   
+                                     
+                                  
+                                  </div>
+                                     {% endif %}
+
+                                    <div class="card-body">
+                                        
+                                        <form  method="POST" enctype="multipart/form-data" action="{% url 'loan:business_loan_application_begin' bank_slug bank_id %}" id="basicform" data-parsley-validate="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="inputEmail">Type of facility</label>
+                                                <input id="inputEmail" type="text" name="business_number" data-parsley-trigger="change" required placeholder="Type of facility" autocomplete="off" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputUserName">Loan amount</label>
+                                                <input id="inputUserName" type="number" name="loanamount" data-parsley-trigger="change" required placeholder="Enter amount of loan" autocomplete="off" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Term of loan (period for which facility is required)</label>
+                                                <input id="inputEmail" type="text" name="termofloan" data-parsley-trigger="change"   placeholder="Enter term of loan" autocomplete="off" class="form-control">
+                                            
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Reason (purpose)</label>
+                                                <textarea id="inputEmail" type="tel" name="Reason" data-parsley-trigger="change" required="" placeholder="Enter reason for taken loan" autocomplete="off" class="form-control"></textarea>
+                                            </div>
+
+                                               
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Upload (pdf) application letter stating the above (type of facility, amount, purpose and period)</label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Upload (pdf) Company’s resolution letter from Board of Directors authorizing the borrowing
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Is amount required more than stated capital of organization?</label>
+                                                <select id="isStatedCapitalMore" required  name="report_category" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                     
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div style="display: none;" class="form-group shareholderLetter">
+                                                <label for="inputEmail">If amount required is more than stated capital, upload (pdf) Shareholder resolution letter on Company’s letterhead(according to GCB format attached)
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Is company new?</label>
+                                                <select id="isTheCompanyNew" required  name="report_category" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                     
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div style="display: none" class="form-group newCompanyStateOfAffairs">
+                                                <label for="inputEmail">If company is new, upload (pdf) Statement of State of Affairs
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div style="display: none;" class="form-group auditedIncomeStatement">
+                                                <label for="inputEmail">If company is old, upload (pdf,excel) Audited financial statement (Income statement) for the past 3 years
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div style="display: none;" class="form-group auditedBalanceSheet">
+                                                <label for="inputEmail">If company is old, upload (pdf,excel) Audited financial statement (Balance sheet) for the past 3 years
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+
+                                            <div  class="form-group">
+                                                <label for="inputEmail">Upload (pdf,excel) Latest management account (Income statement) for the current year
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div  class="form-group">
+                                                <label for="inputEmail">Upload (pdf,excel) Latest management account (Balance sheet) for the current year
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div  class="form-group">
+                                                <label for="inputEmail">Upload (pdf,excel) projected cash flow statement covering the period for which the facility is required
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Name of proposed security for the borrowing</label>
+                                                <input id="inputEmail" type="text" name="business_number" data-parsley-trigger="change" required placeholder="Enter name of proposed security for the borrowing" autocomplete="off" class="form-control">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Description of proposed security for the borrowing</label>
+                                                <textarea id="inputEmail" type="tel" name="Reason" data-parsley-trigger="change" required="" placeholder="Enter description of proposed security for the borrowing" autocomplete="off" class="form-control"></textarea>
+                                            </div>
+
+                                            <div  class="form-group">
+                                                <label for="inputEmail">Upload (pdf) evaluation report of the Property to be used to secure the facility
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div  class="form-group">
+                                                <label for="inputEmail">Upload (pdf) copy of chain of ownership of the property
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Is property owned by the company?</label>
+                                                <select id="isPropertyOwnedByCompany" required  name="report_category" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                     
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div style="display: none;" class="form-group propertyOwnedCompany">
+                                                <label for="inputEmail">If property is not owned by company, upload (pdf,excel) execution of statutory declaration
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div  style="display: none;" class="form-group searchReportLandCommission">
+                                                <label for="inputEmail">If property is not owned by company, upload (pdf,excel) search report from Lands Commission
+
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div  style="display: none;" class="form-group propertyRatePaid">
+                                                <label for="inputEmail">If property is not owned by company, upload (pdf,excel) an evidence of Property Rate Paid
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div style="display: none;" class="form-group groundRentPaid">
+                                                <label for="inputEmail">If property is not owned by company, upload (pdf,excel) an evidence of Ground Rent Paid
+
+                                                </label>
+                                                <input id="inputEmail" type="file" name="businessCertificate" data-parsley-trigger="change" required placeholder="" autocomplete="off" class="form-control">
+                                            </div>
+                                             
+<fieldset><legend><label>Details of management team, board of directors and ownership structure</label> </legend>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+     
+        <div class="simple-card">
+            <ul class="nav nav-tabs" id="myTab5" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active border-left-0" id="home-tab-simple" data-toggle="tab" href="#Team" role="tab" aria-controls="home" aria-selected="true">Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab-simple" data-toggle="tab" href="#Board_of_directors" role="tab" aria-controls="profile" aria-selected="false">Board of directors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab-simple" data-toggle="tab" href="#Ownership_structure" role="tab" aria-controls="contact" aria-selected="false">Ownership structure</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent5">
+                <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="home-tab-simple">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Add team members in your business</h5>
+                            <div class="card-body">
+                                <table id="myTable" class=" table order-list">
+                                    <thead>
+                                        <tr>
+                                            <td>Fullname</td>
+                                            <td>Title</td>
+                                            <td>Age</td>
+                                            <td>Upload CV (Qualification & Previous working experience)</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">
+                                                <input required type="text" placeholder="Fullname" name="Team[]" class="form-control" />
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="Team[]" placeholder="Title"  class="form-control"/>
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="Team[]" placeholder="Age"  class="form-control"/>
+                                            </td>
+
+                                            <td class="">
+                                                <input required type="file" name="Team[]" placeholder="CV"  class="form-control"/>
+                                            </td>
+                                            <td class=""><a class="deleteRow"></a>
+                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add more members" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade" id="Board_of_directors" role="tabpanel" aria-labelledby="profile-tab-simple">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Add members of Board of Directors</h5>
+                            <div class="card-body">
+                                <table id="myTable" class="table order-list-directors">
+                                    <thead>
+                                        <tr>
+                                            <td>Fullname</td>
+                                            <td>Position</td>
+                                            <td>Age</td>
+                                            <td>Nationality</td>
+                                            <td>Upload CV (Qualification & Profession)</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">
+                                                <input required type="text" placeholder="Fullname" name="directors[]" class="form-control" />
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Position"  class="form-control"/>
+                                            </td>
+
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Age"  class="form-control"/>
+                                            </td> 
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Nationality"  class="form-control"/>
+                                            </td>
+
+                                            <td class="">
+                                                <input required type="file" name="Team[]" placeholder="CV"  class="form-control"/>
+                                            </td>
+                                            <td class=""><a class="deleteRowDirector"></a>
+                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-lg btn-block " id="addrowdirector" value="Add more directors" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="tab-pane fade" id="Ownership_structure" role="tabpanel" aria-labelledby="contact-tab-simple">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Add ownership structure of the business</h5>
+                            <div class="card-body">
+                                <table id="myTable" class="table order-list-shareholding">
+                                    <thead>
+                                        <tr>
+                                            <td>Fullname</td>
+                                            <td>Percentage Shareholding</td>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">
+                                                <input required type="text" placeholder="Fullname" name="ownership[]" class="form-control" />
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="ownership[]" placeholder="Percentage shareholding"  class="form-control"/>
+                                            </td>
+                                            
+
+                                             
+                                            <td class=""><a class="deleteRowShareholding"></a>
+                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-lg btn-block " id="addrowShareholding" value="Add more shareholders" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+
+
+
+<fieldset><legend><label>Details of relationships and borrowings with other Banks and financial institutions</label> </legend>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+     
+        <div class="simple-card">
+            <ul class="nav nav-tabs" id="myTab5" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active border-left-0" id="home-tab-simple" data-toggle="tab" href="#Relationships" role="tab" aria-controls="home" aria-selected="true">Relationships</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab-simple" data-toggle="tab" href="#Borrowings" role="tab" aria-controls="profile" aria-selected="false">Borrowings</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content" id="myTabContent5">
+                <div class="tab-pane fade show active" id="Relationships" role="tabpanel" aria-labelledby="home-tab-simple">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Add business relationships with other banks</h5>
+                            <div class="card-body">
+                                <table id="myTable" class="table order-list-bankrelationships">
+                                    <thead>
+                                        <tr>
+                                            <td>Name of bank</td>
+                                            <td>Type of relationship</td>
+                                            <td>Client Since (Year)</td>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">
+                                                <input required type="text" placeholder="Name of bank" name="bank_relationship[]" class="form-control" />
+                                            </td>
+                                            <td class="">
+                                                <select  required  name="bank_relationship[]" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option value="Borrowing">Borrowing</option>
+                                                    <option value="Depository">Depository</option>
+                                                    <option value="Depository">Others (L/C)</option>
+                                                     
+                                                </select>
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="bank_relationship[]" placeholder="Client Since (Year)"  class="form-control"/>
+                                            </td>
+
+                                            
+                                            <td class=""><a class="deleteRowBankRelationship"></a>
+                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-lg btn-block " id="addrowBankRelationship" value="Add more bank relationships" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade" id="Borrowings" role="tabpanel" aria-labelledby="profile-tab-simple">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Add business borrowings with other banks</h5>
+                            <div class="card-body">
+                                <table id="myTable" class="table order-list-directors">
+                                    <thead>
+                                        <tr>
+                                            <td>Fullname</td>
+                                            <td>Position</td>
+                                            <td>Age</td>
+                                            <td>Nationality</td>
+                                            <td>Upload CV (Qualification & Profession)</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">
+                                                <input required type="text" placeholder="Fullname" name="directors[]" class="form-control" />
+                                            </td>
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Position"  class="form-control"/>
+                                            </td>
+
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Age"  class="form-control"/>
+                                            </td> 
+                                            <td class="">
+                                                <input required type="text" name="directors[]" placeholder="Nationality"  class="form-control"/>
+                                            </td>
+
+                                            <td class="">
+                                                <input required type="file" name="Team[]" placeholder="CV"  class="form-control"/>
+                                            </td>
+                                            <td class=""><a class="deleteRowDirector"></a>
+                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-lg btn-block " id="addrowdirector" value="Add more directors" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+              
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+                                          
+
+                                          
+
+
+
+                                            <input id="inputEmail" type="hidden" name="bank_name" value="{{bank_slug}}" data-parsley-trigger="change"   placeholder="Enter term of loan" autocomplete="off" class="form-control">
+                                            <input id="inputEmail" type="hidden" name="bank_id" value="{{bank_id}}" data-parsley-trigger="change"   placeholder="Enter term of loan" autocomplete="off" class="form-control">
+                                            
+                                             
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                                                    <label class="be-checkbox custom-control custom-checkbox">
+                                                         
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <p class="text-left">
+                                                        <button type="submit" class="btn btn-space btn-primary">Submit Business Loan Application</button>
+                                                        <!-- <button class="btn btn-space btn-secondary">Cancel</button> -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                
+
+
+ 
+                     
+                </div>
+            </div>
+
+{% endblock %}

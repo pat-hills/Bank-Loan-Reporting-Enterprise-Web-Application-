@@ -1,0 +1,181 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+
+{% load humanize %}
+
+ 
+
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Business Metric Charts & Insights </h2>
+                    <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'business:business_complete'  %}" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Business Data Chart & Insights</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+       
+        <div class="navbar bg-white breadcrumb-bar border-bottom">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">
+
+                      
+
+                                                   
+                        <span class="badge-dot badge-success mr-1"></span>Published
+                      
+                        <span class="badge-dot badge-brand mr-1"></span>Draft
+                         
+                       
+                        
+                       
+
+
+                    </a>
+
+
+                    </li>
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-calendar-alt"></i>
+                       2012-09-09
+
+
+
+                    </a>
+                    </li>
+                    
+                </ol>
+            </nav>
+            <div class="dropdown">
+                <button class="btn btn-outline-light btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                   
+                    <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="dropdown-divider"></div>
+                    <a  class="dropdown-item" href="#" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i> Delete</a>
+              
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"   href="#"> <i class="fas fa-share-alt"></i> Share</a>
+                    <div class="dropdown-divider"></div>
+                    <!-- <a class="dropdown-item text-primary" href="#"> <i class="far fa-file-pdf"></i> Export To PDF</a> -->
+                    <a class="dropdown-item" href="#"> <i class="far fa-file-pdf"></i> Export To PDF</a>
+                    
+                    <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="dropdown-divider"></div>
+                    <a data-toggle="modal" data-target="#{{month_summary.id}}" class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a>
+                    <div class="dropdown-divider"></div>
+                    
+                </div>
+            </div>
+        </div> </br>
+
+        
+
+         
+       
+
+      
+
+       
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Growth Metric Chart</h5>
+                    <div class="card-body">
+                        <div id="growth_metric_id">
+                        <script>
+                        new Morris.Bar({ 
+                        element: 'growth_metric_id',
+                        data: [
+                        {% if metric_charts_data %}
+
+
+                        {% for chart_data in metric_charts_data %}
+
+                        {% if chart_data.report_metric.institution_custom_metric.unit_measurement != "Text" %}
+
+                    { reporting_date_label: '{{ chart_data.report_metric.institution_custom_metric.metric_name }}', reporting_value:  {{ chart_data.report_value_numeric }} },
+
+                     
+
+                       
+
+                        {% endif %}
+
+                        {% endfor %}
+
+                        {% endif %}
+                                
+                                                       
+                    
+                              ], 
+                                xkey: 'reporting_date_label', 
+                                ykeys: ['reporting_value'],  
+                                labels: ['reporting_value']
+                                });
+
+                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+       
+
+        
+
+        
+
+    
+
+
+
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Bar Chart</h5>
+                    <div class="card-body">
+                        <div id="morris_bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Stacked Bars </h5>
+                    <div class="card-body">
+                        <div id="morris_stacked"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+     
+
+    </div>
+</div>
+ 
+
+{% endblock %}

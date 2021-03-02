@@ -1,0 +1,280 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+
+{% load humanize %}
+
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">{{report_metric.institution_custom_metric.metric_name}} Business Metrics </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                            <li class="breadcrumb-item active" aria-current="page">Business mettrics</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+                               <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </a>
+    
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+
+
+
+                      
+
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">{{report_metric.institution_custom_metric.metric_name}} Bar Growth Chart </h5>
+                    <div class="card-body">
+                        <div id="growth_metric_idd">
+                        <script>
+                        new Morris.Bar({ 
+                        element: 'growth_metric_idd',
+                        data: [
+                        {% if data %}
+
+
+                        {% for dd in data %}
+
+                        {% if dd.report_metric.institution_custom_metric.unit_measurement != "Text" %}
+
+                    { reporting_date_label: '{{ dd.reporting_date }}', reporting_value:  {{ dd.report_value_numeric }} },
+
+                     
+
+                       
+
+                        {% endif %}
+
+                        {% endfor %}
+
+                        {% endif %}
+                                
+                                                       
+                    
+                              ], 
+                                xkey: 'reporting_date_label', 
+                                ykeys: ['reporting_value'],  
+                                labels: ['reporting_value']
+                                });
+
+                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">{{report_metric.institution_custom_metric.metric_name}} Line Growth Chart </h5>
+                    <div class="card-body">
+                        <div id="growth_metric_id">
+                        <script>
+                        new Morris.Line({ 
+                        element: 'growth_metric_id',
+                        data: [
+                        {% if data %}
+
+
+                        {% for dd in data %}
+
+                        {% if dd.report_metric.institution_custom_metric.unit_measurement != "Text" %}
+
+                    { reporting_date_label: '{{ dd.reporting_date }}', reporting_value:  {{ dd.report_value_numeric }} },
+
+                     
+
+                       
+
+                        {% endif %}
+
+                        {% endfor %}
+
+                        {% endif %}
+                                
+                                                       
+                    
+                              ], 
+                                xkey: 'reporting_date_label', 
+                                ykeys: ['reporting_value'],  
+                                labels: ['reporting_value']
+                                });
+
+                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+        </div>  
+
+
+
+
+        <div class="row">
+
+           
+                
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div style="border-radius:10px;" class="card border-3 border-top border-top-primary">
+                    <div class="card-body">
+
+
+                        <h5 class="text-muted">{{report_metric.institution_custom_metric.metric_name}} Overall Total </h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 style="color: #0357A7;" class="mb-1">
+                                {% if report_metric.institution_custom_metric.unit_measurement == "Monetary" %}
+                                {{data_sum.data_sum|floatformat:2|intcomma }}
+                                {% else %}
+                                {{data_sum.data_sum|floatformat:1|intcomma }}
+                                {% endif %}
+
+                            </h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                          
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                       
+
+                     <div class="row">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex">
+                                    <h4 class="card-header-title">Figures ( Amount ) Submitted</h4>
+                                    <div class="toolbar ml-auto">
+                                        
+                                           
+                                        <!-- <button type="button" class="btn btn-lg btn-info" data-toggle="popover" title="Loan status information" data-content="">You have an unpaid or pending loan status!</button>
+                                    -->
+                                        
+                                        <a href="{% url 'businessreport:submit_business_report'   %}" class="btn btn-primary btn-sm ">Submit Business Report</a>
+                                       
+                                        <!-- <a href="#" class="btn btn-light btn-sm">PDF</a> -->
+                                         
+                                   
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="bg-light">
+                                                <tr class="border-0">
+                                                    <th class="border-0">#</th>
+                                                  
+                                                    <th class="border-0">Date of submission</th>
+                                                 
+                                                    <th class="border-0">Value (number / amount / percentage)</th>
+                                                    <th class="border-0">Date created</th>
+                                                    <th class="border-0">Submitted by</th>
+                                                    <th class="border-0"> </th>
+                                                   
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                {% if data %}
+                                                                           
+                                                {% for d in data %}
+
+                                                {% if data.report_metric.institution_custom_metric.unit_measurement != "Text" %}
+                                                <tr>
+                                                    <td>
+                                                        {{d.id}}
+                                                      </td>
+                                                    <td>
+                                                      {{d.reporting_date}}
+                                                    </td>
+                                                   
+
+                                                    <td>  
+                                                
+                                                        {{d.report_value_numeric}}
+                                                
+                                                </td>
+                                                    <td> {{d.date_time_created}} </td>
+                                                    <td> {{d.user.first_name}} </td>
+
+                                                   
+                                                     
+                                                </tr>
+                                                
+                                                {% endif %}
+                                                {% empty %}
+                                                <li>No Records!!!!.</li>
+                                                {% endfor %}
+                                                {% endif %}
+
+
+                                                
+                                                 
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                     </div>
+
+
+
+                </div>
+
+
+               
+
+            </div>
+
+           
+
+{% endblock %}

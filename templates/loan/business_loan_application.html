@@ -1,0 +1,365 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                  
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title"> Business Loan Application </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                            <li class="breadcrumb-item active" aria-current="page">Business loan application</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+                           <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </a>
+
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+
+                    <div class="row"> 
+                        <!-- <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+                          
+                        </div>  -->
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <!-- ============================================================== -->
+                            <!-- campaign tab one -->
+                            <!-- ============================================================== -->
+                            <!-- <div class="influence-profile-content pills-regular"> -->
+
+                                <!-- <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                                  
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">More Information On Business</a>
+                                    </li>
+                                  
+                                </ul> -->
+                                
+                                <div class="tab-content" id="pills-tabContent">
+
+                                   
+
+                           
+<!-- 
+                                    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab"> -->
+                                        <div class="card">
+
+<!--                                             
+                                            <div>
+                                                <h2 class="card-header">Ghana Commercial Bank</h2>
+                                                <img class="imgLogo" width="100" height="auto" src="{% static 'img/gh-gcb-logo.png' %}" alt="">   
+                                                <h2 class="card-header">Smart E-loan Application</h2>
+                                            </div> -->
+
+                                          
+
+                                            <div class="card-body">
+                                                <div align="center">
+                                                    <h2 class="">Ghana Commercial Bank</h2>
+                                                    <img style="margin-top: -15px" class="imgLogo" width="100" height="auto" src="{% static 'img/gh-gcb-logo.png' %}" alt="">   
+                                                    <h4 class="">Smart E-Business Loan Application</h4>
+                                                    
+                                                    
+                                                    <!-- <span class="text-dark font-weight-bold">Smart E-loan Application</span> -->
+                                                    <p class="review-text font-italic m-0">Understanding the requirements in the application is as important as providing the right information in the form fields. Below are certain tips for completing your business loan application form.</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                             
+                                                <div class="review-block">
+                                                    <span class="font-weight">1. Application letter (pdf) upload stating;</span> 
+                                                  <li> the type of facility</li>
+                                                  <li> amount required</li>
+                                                  <li> the purpose</li>
+                                                  <li> the period for which the facility is required</li>
+                                                    
+                                                  
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">2. Company's Resolution letter upload (pdf) on company's letterhead (according to GCB format attached) from the 
+                                                        Board of Directors authorising the borrowing.
+                                                    </span> 
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">3. Shareholder's Resolution letter upload (pdf) on company's letterhead (according to GCB format attached) if amount required 
+                                                        is more than the stated capital of the organization.
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">4. Audited financial statement (Income Statement and Balance sheet) upload (excel) for the past 3 years (or statement of State of Affairs upload (pdf) if company is new)
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">5. Latest Management accounts (Balance sheet and Profit and Loss) for the current year upload (excel)
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">6. Projected Cash flow statement upload (excel) covering the period for which the facility is required
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">7. Valuation Report of Property upload (pdf) to be used to secure the facility
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">8. Copies of title Deeds of propert(ies) upload (pdf) that will used as security to support the application
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">9. Execution of statutory declaration upload (pdf) if property is not owned by the company
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">10. A search report upload from the Lands Commission on the property addressed to the head of Legal GBC Bank </br>
+                                                       <a style="color:  #e83e8c;" href="" target="_blank">View Sample</a> 
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">11. Evidence of Property Rate Paid upload</br>
+                                                       <a href="" target="_blank">View Sample</a> 
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">12. Ground Rent Paid upload (For leasehold properties)</br>
+                                                       <a href="" target="_blank">View Sample</a> 
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">13. Details of management team (Name, title, Age, Qualification and previous working experience) and CV upload
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">14. Details of members of Board of Directors (Name, Position, Age, Nationality) and CV upload
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">15. Ownership structure (Name, Percentage Shareholding)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">16. Details Of relationships with other Banks and financial institutions (Name of bank, type of relationships,period)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">17. Details Of borrowings with other financial institutions stating (Type of facility, amount approved, date approved, expiry date, amount outstanding)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">18. Major competitors
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">19. Details of key suppliers (Name, annual average volume of suppliers, terms of trade)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">20. Details of key buyers (Name, annual average volume of suppliers, terms of trade)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">21. If request is for project financing, please provide and upload (pdf) the Feasibility Report.Business plan
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">22. Upload (pdf) bills of quantities for the project
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">23. Upload invoices or profoma invoices of application
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">24. Provision of necessary licences and regulatory approvals upload for the intended project
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">25. Business registration details. All registrar general's documents upload (pdf)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">26. Two years Bank Statement from your previous Bankers upload (pdf)
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">27. Brief Write-up on the company
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <span class="font-weight">28. Your business agrees to provide all important information and documents as listed and numbered above, <a href="">accept our terms and conditions</a>, 
+                                                        <a href="">privacy policies</a>
+                                                      
+                                                    </span> 
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body border-top">
+                                                <div class="review-block">
+                                                    <form>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" disabled checked class="custom-control-input btn-primary"><span class="custom-control-label">By begining application, business accepts <a href="">agreement terms</a>  and <a href="">privacy policies</a> of Ghana Commercial Bank</span>
+                                                        </label>
+                                                        
+                                                        
+                                                        <a href="{% url 'loan:business_loan_application_begin' bank_name bank_id  %}" class="btn btn-primary">Begin Business Loan Application</a>
+                                                        
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                          
+
+ 
+                                           
+
+
+                                            
+
+
+                                           
+
+
+                                        </div>
+                                        
+                                    <!-- </div> -->
+
+                                   
+
+                                </div>
+                            <!-- </div> -->
+                         
+                        </div>
+                      
+                    </div>
+
+                   
+                </div>
+            </div>
+
+           
+
+{% endblock %}

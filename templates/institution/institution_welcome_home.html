@@ -1,0 +1,107 @@
+{% extends "institution/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+
+<div class="container-fluid dashboard-content">
+    <div class="row">
+        <div class="col-xl-10">
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header" id="top">
+                        <h2 class="pageheader-title">{{greetings}}, {{request.user.first_name}}, how is it going? </h2>
+                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <!-- <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{users_institution.name}}</li> -->
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+ 
+
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="section-block" id="cardaction">
+          <h3 class="section-title">Here is your financial institution</h3>
+          <p></p>
+      </div>
+  </div>
+   
+   
+  
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="card">
+          <div class="card-header d-flex">
+             
+               
+          </div>
+          <div class="card-body">
+            <img width="125" height="auto" class="img-fluid" src="{{MEDIA_URL }}{{users_institution.logo}}" alt="{{request.session.institution_slug_name}}">
+                  <!-- <p></p> -->
+
+                  <h3 class="card-header-title">{{request.session.institution_name}}, {{request.session.institution_location}}</h3>
+
+              <p class="card-text">
+
+              
+                {{users_institution.tagline}}
+                
+                </p>
+            
+          </div>
+          <div class="card-footer">
+             
+                <a href="{% url 'institution:institution_dashboard' request.session.institution_slug_name  %}" class="btn btn-primary">Go To Dashboard</a>
+                <!-- <a href="#" class="card-link">Card Link</a> -->
+            
+        </div>
+      </div>
+  </div>
+  <div class="col-xl-6 col-lg-6 col-md-126 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+           
+             
+        </div>
+        <div class="card-body">
+          <!-- <img style="width: 100px; height: auto;" class="img-fluid" src="{% static 'img/settings.png' %}" alt=""> -->
+                <!-- <p></p> -->
+
+                <h3 class="card-header-title">Institution profile</h3>
+
+                
+
+            <p class="card-text">
+                Did you miss any information on seting up? </br>
+                Don't worry?</br>
+                Some quick editing and updating of your institution profile can done right here!
+              
+              </p>
+          
+        </div>
+        <div class="card-footer">
+           
+              <a href="#" class="btn btn-danger">Go To Edit Settings</a>
+              <!-- <a href="#" class="card-link">Card Link</a> -->
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+ {% endblock %}

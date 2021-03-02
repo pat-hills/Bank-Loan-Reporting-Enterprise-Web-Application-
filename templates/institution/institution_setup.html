@@ -1,0 +1,153 @@
+{% extends "institution/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Hello, {{request.user.first_name}}, Let's setup your institution details! </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Institution setup</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- validation form -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                <div class="card">
+                                    <h5 class="card-header">Institution Setup Form</h5>
+
+                                    {% if message %}
+                                    <div>
+                                      <label id="error2" style="color:red;display: inline-block; position: static; text-align: center;">
+                                          <li>{{ message }}</li>
+                                      </label>   
+                                     
+                                  
+                                  </div>
+                                     {% endif %}
+
+                                    <div class="card-body">
+                                        
+                                        <form  method="POST" enctype="multipart/form-data" action="{% url 'institution:institution_setup_register' %}" id="basicform" data-parsley-validate="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="inputUserName">Name</label>
+                                                <input id="inputUserName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter name of institution" autocomplete="off" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Location (Branch)</label>
+                                                <input id="inputEmail" type="text" name="branch" data-parsley-trigger="change" required="" placeholder="Enter location or branch" autocomplete="off" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Tagline</label>
+                                                <textarea id="inputEmail" type="tel" name="tagline" data-parsley-trigger="change" required="" placeholder="Enter institution tagline" autocomplete="off" class="form-control"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Country</label>
+                                                <select name="country" class="form-control">
+                                                    <option selected>Ghana</option>
+                                                    <option>Nigeria</option>
+                                                    <option>Zambia</option>
+                                                    <option>Zimbabwe</option>
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Region</label>
+                                                <select required name="region" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option >Ashanti</option>
+                                                    <option>Greater Accra</option>
+                                                    <option>Eastern</option>
+                                                    <option>Western</option>
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">District</label>
+                                                <select name="district" class="form-control">
+                                                    <option selected>Aywaso</option>
+                                                    <option>Kwadaso</option>
+                                                    <option>Bonso</option>
+                                                    <option>Otuaso</option>
+                                                </select>
+                                                
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Upload Logo</label>
+                                                <input id="inputEmail" type="file" name="institutionLogo" data-parsley-trigger="change" required="" placeholder="Enter contact" autocomplete="off" class="form-control">
+                                            </div>
+                                             
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                                                    <label class="be-checkbox custom-control custom-checkbox">
+                                                         
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <p class="text-left">
+                                                        <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                                        <!-- <button class="btn btn-space btn-secondary">Cancel</button> -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                
+
+
+ 
+                     
+                </div>
+            </div>
+
+{% endblock %}

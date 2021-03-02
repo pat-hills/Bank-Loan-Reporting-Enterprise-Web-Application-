@@ -1,0 +1,159 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Submit Business Report </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Submit business report</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+                           <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </a>
+
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- validation form -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                <div class="card">
+                                    <h5 class="card-header">New business report</h5>
+
+                                   
+            
+
+                                    <div class="card-body">
+
+                                       
+                                        
+                                        <form  method="POST"  enctype="multipart/form-data" action="{% url 'businessreport:submit_business_report' %}" id="basicform" data-parsley-validate="">
+                                            {% csrf_token %}
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Date of submission</label>
+                                              
+                                                <div class="input-group date"  data-target-input="nearest">
+                                                    <input required autocomplete="off"  class="datepicker" name="date_of_report" data-date-end-date="0d"  />
+                                                   
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">Report category</label>
+                                                <select required  name="report_category" class="form-control">
+                                                    <option selected>----------</option>
+                                                    <option value="Published">Published</option>
+                                                    <option value="Draft">Draft</option>
+                                                     
+                                                </select>
+                                                
+                                            </div>
+
+                                            {% if user_business_report_metrics %}
+                                                                           
+                                            {% for user_business_metric in user_business_report_metrics %}
+
+                                            {% if user_business_metric.institution_custom_metric.unit_measurement == "Text" %}
+
+                                            <div class="form-group">
+                                                <label for="inputEmail">{{user_business_metric.institution_custom_metric.metric_name}}</label>
+                                                <textarea class="summernote"  name="{{user_business_metric.institution_custom_metric.metric_short_name}}" data-parsley-trigger="change" required placeholder="Enter {{user_business_metric.institution_custom_metric.metric_name}}" autocomplete="off" class="form-control"></textarea>
+                                                <small>{{user_business_metric.institution_custom_metric.metric_short_name}}</small>
+                                            </div>
+
+                                            {% else %}
+
+                                            <div class="form-group">
+                                                <label for="inputUserName">{{user_business_metric.institution_custom_metric.metric_name}}</label>
+                                                <input id="inputUserName" type="number" name="{{user_business_metric.institution_custom_metric.metric_short_name}}" data-parsley-trigger="change" required placeholder="Enter {{user_business_metric.institution_custom_metric.metric_name}}" autocomplete="off" class="form-control">
+                                               
+                                                <small>{{user_business_metric.institution_custom_metric.metric_short_name}}</small>
+                                            </div>
+
+                                            {% endif %}
+
+                                           
+                                            
+                                               
+
+                                            {% empty %}
+                                             <li>No Records!!!!.</li>
+                                             {% endfor %}
+                                             {% endif %}
+
+            
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                                                    <label class="be-checkbox custom-control custom-checkbox">
+                                                         
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <p class="text-left">
+                                                        <button type="submit" name="Published" value="Published" class="btn btn-space btn-primary">Submit Report</button>
+                                                      
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                
+
+
+ 
+                     
+                </div>
+            </div>
+
+{% endblock %}

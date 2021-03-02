@@ -1,0 +1,294 @@
+{% extends "business/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Business Reports </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                            <li class="breadcrumb-item active" aria-current="page">Business reports</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+                               <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </a>
+    
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+
+                     <div class="row">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex">
+                                    <h4 class="card-header-title">List Of Business Reports</h4>
+                                    <div class="toolbar ml-auto">
+                                        
+                                           
+                                        <!-- <button type="button" class="btn btn-lg btn-info" data-toggle="popover" title="Loan status information" data-content="">You have an unpaid or pending loan status!</button>
+                                    -->
+
+                                    <!-- {% if not user_latest_application %}
+                                        
+                                    <a href="{% url 'loan:business_loans' request.session.business_slug_name  %}" class="btn btn-danger">Can't submit business report! Apply for loan.</a>
+                                   
+                                    {% elif user_latest_application.loan_category == "PENDING" %}
+                                    <a href="{% url 'loan:business_loans' request.session.business_slug_name  %}" class="btn btn-danger">Can't submit business report! View your loan status.</a>
+                                   
+                                   
+                                    {% elif user_latest_application.loan_category == "DENY"  %}
+                                    <a href="{% url 'loan:business_loans' request.session.business_slug_name  %}" class="btn btn-danger">Can't submit business report! View your loan status.</a>
+                                   
+                                    {% else %} -->
+
+                                        <a href="{% url 'businessreport:submit_business_report'   %}" class="btn btn-primary btn-sm ">Submit Business Report</a>
+                                       
+                                        <!-- <a href="#" class="btn btn-light btn-sm">PDF</a> -->
+                                        <!-- {% endif %}   -->
+                                   
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="bg-light">
+                                                <tr class="border-0">
+                                                    <th class="border-0">#</th>
+                                                  
+                                                    <th class="border-0">Date of submission</th>
+                                                    <th class="border-0">Status</th>
+                                                    <th class="border-0">Date created</th>
+                                                    <th class="border-0">Submitted by</th>
+                                                    <th class="border-0"> </th>
+                                                   
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                {% if user_submitted_report %}
+                                                                           
+                                                {% for summary in user_submitted_report %}
+                                                <tr>
+                                                    <td>
+                                                        {{summary.id}}
+                                                      </td>
+                                                    <td>
+                                                      {{summary.reporting_date}}
+                                                    </td>
+                                                    <td>  
+                                                
+                                                    {% if summary.report_category == "Published"   %}
+
+                                                   
+                                                    <span class="badge-dot badge-success mr-1"></span>Published
+                                                    {% else %}
+                                                    <span class="badge-dot badge-brand mr-1"></span>Draft
+                                                     
+                                                    {% endif %}
+                                                
+                                                </td>
+                                                    <td> {{summary.date_time_created}} </td>
+                                                    <td> {{summary.user.first_name}} </td>
+
+                                                    <td>
+                                                        <div class="dropdown float-right">
+                                                            <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <!-- item-->
+
+                                                                {% if summary.report_category == "Published"   %}
+                                                                
+                                                                <a href="{% url 'businessreport:view_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-eye"></i> View Report</a>
+                                                                <a href="{% url 'businessreport:edit_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-edit"></i> Edit Report</a>
+                                                                <a href="#" class="dropdown-item text-danger" data-toggle="modal" data-target="#{{summary.id}}"> <i class="fas fa-trash"></i> Delete Report</a>
+                                                                
+                                                                <a href="{% url 'businessreport:edit_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-share-alt"></i> Share Report</a>
+                                                                <a href="{% url 'businessreport:edit_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="far fa-file-pdf"></i> Export To PDF</a>
+                                                           
+                                                                {% else %}
+
+                                                                <a href="{% url 'businessreport:view_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-eye"></i> View Report</a>
+                                                                <a href="{% url 'businessreport:edit_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-edit"></i> Edit Report</a>
+                                                                <a href="#" class="dropdown-item text-danger" data-toggle="modal" data-target="#{{summary.id}}"> <i class="fas fa-trash"></i> Delete Report</a>
+                                                                
+                                                                {% endif %}
+                                                           
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="{{summary.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure, you want to delete monthly report?</h5>
+                                                                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </a>
+                                                                    </div>
+                                        
+                                                                    <div class="modal-body">
+                                                                     
+                                                                        <form  method="POST" action="{% url 'businessreport:delete_monthly_report' summary.id %}" id="basicform" data-parsley-validate="">
+                                                                            {% csrf_token %}
+                                                                            
+                                                                            
+                                                                                 
+                                                                                <input id="inputEmail" type="hidden" value="{{summary.id}}"   name="id"  required   autocomplete="off" class="form-control">
+                                                                                 
+                                                                           
+                                        
+                                                                          
+                                                                            
+                                                                            <div class="modal-footer">
+                                                                                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                                                <button type="submit" class="btn btn-space btn-danger">Delete Report</button>
+                                                                            </div>
+                                        
+                                                                            
+                                                                        </form>
+                                        
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </td>
+                                                     
+                                                </tr>
+                                                
+                                                
+                                                {% empty %}
+                                                <li>No Records!!!!.</li>
+                                                {% endfor %}
+                                                {% endif %}
+
+
+                                                <!-- 
+                                                <tr>
+
+
+
+
+                                                    <td>1</td>
+                                                    
+                                                    <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>
+                                                  
+                                                    <td>20</td>
+                                                    <td>$80.00</td>
+                                                    <td>27-08-2018 01:22:12</td>
+
+                                                    <td>
+                                                        <div class="dropdown float-right">
+                                                            <a href="#"  data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                               
+                                                                <a href="" class="dropdown-item">View/Edit</a>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                
+                                                   
+                                                   
+                                                </tr>
+                                                 
+                                                 -->
+                                                 
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                     </div>
+
+                </div>
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure, you want to delete monthly report?</h5>
+                                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </a>
+                            </div>
+
+                            <div class="modal-body">
+                             
+                                <form  method="POST" action="#" id="basicform" data-parsley-validate="">
+                                    {% csrf_token %}
+                                    
+                                    
+                                         
+                                        <input id="inputEmail" type="text" name="metricshortname"  required   autocomplete="off" class="form-control">
+                                         
+                                   
+
+                                  
+                                    
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                        <button type="submit" class="btn btn-space btn-primary">Delete Report</button>
+                                    </div>
+
+                                    
+                                </form>
+
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+           
+
+{% endblock %}

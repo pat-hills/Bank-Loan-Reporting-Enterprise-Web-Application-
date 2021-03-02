@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=152368
+  -->
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+  </configSections>
+  <connectionStrings>
+    <!--<add name="CBLDataContext" connectionString="Data Source=KWAKU-PC\SQLEXPRESS2012; Initial Catalog=CRGUATDB; Integrated Security=True" providerName="System.Data.SqlClient" />-->
+    <add name="CBLDataContext" connectionString="Data Source=LAPTOP-DNKBP1TI; Initial Catalog=CRGUATDB; Integrated Security=True" providerName="System.Data.SqlClient" />
+    <add name="CRLHealthMonitoring" connectionString="Data Source=DESKTOP-927KGGS; Initial Catalog=CRLHealthMonitoring; Integrated Security=True" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <!-- Required by Microsoft ReportViewer control -->
+    <add key="webpages:Version" value="2.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="PreserveLoginUrl" value="true" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="MvcReportViewer.AspxViewer" value="/MvcReportViewer.aspx" />
+    <add key="MvcReportViewer.ReportServerUrl" value="http://localhost/ReportServer_SQLEXPRESS" />
+    <add key="MvcReportViewer.Username" value="" />
+    <add key="MvcReportViewer.Password" value="" />
+    <add key="onTestSite" value="true" />
+    <add key="onTestSiteSubjectPrefix" value="Test Dev Application" />
+    <add key="CurrentBatchDesktopVersion" value="1" />
+    <add key="LeastSupportedBatchDesktopVersion" value="1" />
+    <add key="PublicUser" value="3" />
+    <add key="RootFolder" value="" />
+    <add key="ApplicationPort" value="" />
+    <add key="UtcOffset" value="1" />
+    <add key="TransitionPeriodOn" value="False" />
+    <add key="PendingClosureLimit" value="14" />
+    <add key="DefaultHelpDeskSupportGroup" value="1" />
+    <add key="EnableMerger" value="True" />
+    <add key="EnableHelpdesk" value="True" />
+    <add key="EnableFundsTansfer" value="True" />
+    <add key="EnableRefund" value="false" />
+    <add key="commandTimeOut" value="90" />
+    
+  </appSettings>
+  
+  
+  
+  <system.net>
+    <mailSettings>
+      <smtp deliveryMethod="Network" from="kaboraa@gmail.com">
+        <network defaultCredentials="false" enableSsl="true" host="smtp.gmail.com" port="587" userName="kaboraa" password="pppppppp" />
+      </smtp>
+    </mailSettings>
+  </system.net>
+
+  
+
+
+
+  <system.web>
+
+    <httpCookies httpOnlyCookies="true" requireSSL="true" />
+    <!--<httpCookies httpOnlyCookies="true" requireSSL="true" lockItem="true" />-->
+    <!--<httpCookies requireSSL="true" />-->
+    <globalization uiCulture="en" culture="en-GB" />
+    <httpRuntime targetFramework="4.5" maxRequestLength="1048576" enableVersionHeader="false" enableHeaderChecking="true" executionTimeout="3600" />
+
+
+    
+    
+
+    <compilation debug="true" targetFramework="4.5">
+      <assemblies>
+        <add assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />
+        <add assembly="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />
+        <add assembly="Microsoft.Build.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+      </assemblies>
+      <buildProviders>
+        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+      </buildProviders>
+    </compilation>
+    <authentication mode="Forms">
+      <forms loginUrl="~/Account/Login" timeout="30"/>
+    </authentication>
+    <pages>
+      <namespaces>
+        <add namespace="System.Web.Helpers" />
+        <add namespace="System.Web.Mvc" />
+        <add namespace="System.Web.Mvc.Ajax" />
+        <add namespace="System.Web.Mvc.Html" />
+        <add namespace="System.Web.Optimization" />
+        <add namespace="System.Web.Routing" />
+        <add namespace="System.Web.WebPages" />
+      </namespaces>
+    </pages>
+    <healthMonitoring enabled="true">
+      <eventMappings>
+        <clear />
+        <add name="All Errors" type="System.Web.Management.WebBaseErrorEvent" startEventCode="0" endEventCode="2147483647" />
+      </eventMappings>
+      <providers>
+        <clear />
+        <!-- -->
+        <add name="EmailErrorProvider" type="System.Web.Management.SimpleMailWebEventProvider" to="kaboraa@gmail.com" from="kaboraa@gmail.com" buffer="false" subjectPrefix="CRL Application Error (Kaboraa Test Server)" bodyHeader="Kaboraa Test Server Application Error." />
+        <add connectionStringName="CRLHealthMonitoring" maxEventDetailsLength="1073741823" buffer="false" bufferMode="Logging" name="SqlWebEventProvider" type="System.Web.Management.SqlWebEventProvider" />
+      </providers>
+      <rules>
+        <clear />
+        <!-- disable next line for test servers or set  -->
+        <!-- <add name="Rule For Errors" eventName="All Errors" provider="EmailErrorProvider" profile="Default" minInstances="1" maxLimit="Infinite" minInterval="00:00:01" custom="" /> -->
+        <add name="All Errors To Database" eventName="All Errors" provider="SqlWebEventProvider" profile="Default" minInstances="1" maxLimit="Infinite" minInterval="00:00:01" />
+      </rules>
+    </healthMonitoring>
+    <customErrors mode="Off" defaultRedirect="Error/Error">
+      <error statusCode="404" redirect="~/ErrorPages/PageNotFound" />
+      <error statusCode="408" redirect="~/ErrorPages/Timeout" />
+      <error statusCode="599" redirect="~/ErrorPages/Timeout" />
+    </customErrors>
+    <profile defaultProvider="DefaultProfileProvider">
+      <providers>
+        <add name="DefaultProfileProvider" type="System.Web.Providers.DefaultProfileProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" applicationName="/" />
+      </providers>
+    </profile>
+    <membership defaultProvider="DefaultMembershipProvider">
+      <providers>
+        <add name="DefaultMembershipProvider" type="System.Web.Providers.DefaultMembershipProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="6" minRequiredNonalphanumericCharacters="0" passwordAttemptWindow="10" applicationName="/" />
+      </providers>
+    </membership>
+    <roleManager defaultProvider="DefaultRoleProvider">
+      <providers>
+        <add name="DefaultRoleProvider" type="System.Web.Providers.DefaultRoleProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" applicationName="/" />
+      </providers>
+    </roleManager>
+    <!--
+            If you are deploying to a cloud environment that has multiple web server instances,
+            you should change session state mode from "InProc" to "Custom". In addition,
+            change the connection string named "DefaultConnection" to connect to an instance
+            of SQL Server (including SQL Azure and SQL  Compact) instead of to SQL Server Express.
+      -->
+    <sessionState mode="InProc" customProvider="DefaultSessionProvider">
+      <!--timeout="31"-->
+      <providers>
+        <add name="DefaultSessionProvider" type="System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" />
+      </providers>
+    </sessionState>
+    <httpHandlers>
+      <!-- Required by Microsoft ReportViewer control -->
+      <add path="Reserved.ReportViewerWebControl.axd" verb="*" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" validate="false" />
+    </httpHandlers>
+  </system.web>
+  
+  
+  
+  <system.webServer>
+    
+    <security>
+      <requestFiltering removeServerHeader="true">
+        <requestLimits maxAllowedContentLength="1073741824" />
+      </requestFiltering>
+    </security>
+    <validation validateIntegratedModeConfiguration="false" />
+    <handlers>
+      <!-- Required by Microsoft ReportViewer control -->
+      <remove name="ExtensionlessUrlHandler-ISAPI-4.0_32bit" />
+      <remove name="ExtensionlessUrlHandler-ISAPI-4.0_64bit" />
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+      <add name="ExtensionlessUrlHandler-ISAPI-4.0_32bit" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" modules="IsapiModule" scriptProcessor="%windir%\Microsoft.NET\Framework\v4.0.30319\aspnet_isapi.dll" preCondition="classicMode,runtimeVersionv4.0,bitness32" responseBufferLimit="0" />
+      <add name="ExtensionlessUrlHandler-ISAPI-4.0_64bit" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" modules="IsapiModule" scriptProcessor="%windir%\Microsoft.NET\Framework64\v4.0.30319\aspnet_isapi.dll" preCondition="classicMode,runtimeVersionv4.0,bitness64" responseBufferLimit="0" />
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+      <remove name="ReportViewerWebControlHandler" />
+      <add name="ReportViewerWebControlHandler" preCondition="integratedMode" verb="*" path="Reserved.ReportViewerWebControl.axd" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    </handlers>
+
+
+	  <httpProtocol>
+		  <customHeaders>
+			  <add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains" />
+			  <add name="X-Permitted-Cross-Domain-Policies" value="master-only" />
+			  <add name="Referrer-Policy" value="origin" />
+			  <add name="X-Content-Type-Options" value="NOSNIFF" />
+			  <add name="X-XSS-Protection" value="1; mode=block" />
+			  <add name="Access-Control-Allow-Origin" value="*" />
+			  
+			   <!-- Required by Microsoft ReportViewer control -->
+			  
+			  <add name="Content-Security-Policy" value="script-src-elem https 'self' 'unsafe-inline'; style-src-elem https 'self' 'unsafe-inline' " />
+		      
+		      <remove name="X-Powered-By"/>
+		  </customHeaders>
+	  </httpProtocol>
+
+  </system.webServer>
+  
+  
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="2.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-2.0.0.0" newVersion="2.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="EntityFramework" publicKeyToken="b77a5c561934e089" />
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-1.3.0.0" newVersion="1.3.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="v11.0" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+</configuration>

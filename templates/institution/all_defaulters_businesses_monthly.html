@@ -1,0 +1,182 @@
+{% extends "institution/layout.html" %}
+
+{% block body %}
+
+{% load static %}
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="card">
+                                            
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+        
+                        </div>    -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title"> Report Defaulters </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+
+                                            <li class="breadcrumb-item active" aria-current="page">Report defaulters</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+                               <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </a>
+    
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+
+                     <div class="row">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex">
+                                    <h4 class="card-header-title">List Of Report Defaulters</h4>
+                                    <div class="toolbar ml-auto">
+                                        
+                                           
+                                        <!-- <button type="button" class="btn btn-lg btn-info" data-toggle="popover" title="Loan status information" data-content="">You have an unpaid or pending loan status!</button>
+                                    -->
+                                        
+                                        
+                                        <!-- <a href="#" class="btn btn-light btn-sm">PDF</a> -->
+                                         
+                                   
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="bg-light">
+                                                <tr class="border-0">
+                                                    <th class="border-0">#</th>
+                                                  
+                                                    <th class="border-0">Name of business</th>
+                                                    <th class="border-0">Date of submission</th>
+                                                    <th class="border-0">Status</th>
+                                                    <th class="border-0">Date created</th>
+                                                    <th class="border-0">Prepared by</th>
+                                                    <!-- <th class="border-0"> </th> -->
+                                                   
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                {% if all_defaulters_month %}
+                                                                           
+                                                {% for summary in all_defaulters_month %}
+
+                                                {% if summary.report_category == "Draft"   %}
+
+
+                                                <tr>
+                                                    <td>
+                                                        {{summary.id}}
+                                                      </td>
+                                                      <td>
+                                                        {{summary.business.name}},  {{summary.business.location}}
+                                                      </td>
+                                                    <td>
+                                                      {{summary.reporting_date}}
+                                                    </td>
+                                                    <td>  
+                                                
+                                                   
+
+                                                   
+                                                    <span class="badge-dot badge-brand mr-1"></span>{{summary.report_category}}
+                                                  
+                                                   
+                                                     
+                                                   
+                                                
+                                                </td>
+                                                    <td> {{summary.date_time_created}} </td>
+                                                    <td> {{summary.user.first_name}} </td>
+
+                                                    <!-- <td>
+                                                        <div class="dropdown float-right">
+                                                            <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                
+
+                                                                
+                                                                
+                                                                <a href="{% url 'institution:view_break_down_summary_monthly_report' summary.id %}" class="dropdown-item text-primary"> <i class="fas fa-eye"></i> View Report</a>  
+                                                                
+                                                                <a href="#" class="dropdown-item text-primary"> <i class="fas fa-share-alt"></i> Share Report</a>
+                                                                <a href="#" class="dropdown-item text-primary"> <i class="far fa-file-pdf"></i> Export To PDF</a>
+                                                           
+                                                           
+
+                                                               
+                                                             
+                                                           
+                                                            </div>
+                                                        </div>
+
+                                                       
+
+
+                                                    </td> -->
+                                                     
+                                                </tr>
+                                                {% endif %}
+                                                
+                                                {% empty %}
+                                                <li>No Records!!!!.</li>
+                                              
+                                                {% endfor %}
+                                                {% endif %}
+
+
+                                             
+                                                 
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                     </div>
+
+                </div>
+
+ 
+
+            </div>
+
+           
+
+{% endblock %}
