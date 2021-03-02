@@ -152,9 +152,9 @@ WSGI_APPLICATION = 'repurta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'repurta_database', 
+        'NAME': '', 
         'USER': 'postgres', 
-        'PASSWORD': 'pathills2020',
+        'PASSWORD': '',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
